@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
 
-  apiUrl: 'http://stage.rescrypto.pro/challenge/api'
+  apiUrl: 'http://stage.rescrypto.pro:5005/api'
 };
 
 /*
