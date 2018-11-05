@@ -1,0 +1,112 @@
+<div class="cdk-overlay-container" *ngIf="isInit">
+  <div class="cdk-overlay-backdrop cdk-overlay-dark-backdrop cdk-overlay-backdrop-showing"></div>
+  <div class="cdk-global-overlay-wrapper"  style="justify-content: center; align-items: center;">
+    <div id="cdk-overlay-50" class="cdk-overlay-pane"
+         style="max-width: 80vw; pointer-events: auto; width: 360px; position: static;">
+      <div tabindex="0" class="cdk-visually-hidden cdk-focus-trap-anchor"></div>
+      <div aria-modal="true"
+           class="mat-dialog-container ng-tns-c92-263 ng-trigger ng-trigger-dialogContainer ng-star-inserted"
+           tabindex="-1" id="mat-dialog-7" role="dialog" aria-labelledby="mat-dialog-title-7"
+           style="transform: none;">
+        <div *ngIf="product" class="ng-star-inserted">
+          <div class="back" (click)="goBack()">
+            <mat-icon class="header-icon">arrow_back</mat-icon>
+          </div>
+          <img src="{{product.images.full_size}}">
+          <div class="product-header">
+            <div class="title">{{product.name}}</div>
+            <div class="sub-title">{{product.description}}</div>
+          </div>
+
+          <mat-list *ngIf="price">
+            <mat-divider></mat-divider>
+            <mat-list-item class="price">
+              <div>
+                {{ price | currency:'USD' :'symbol':'0.0-0'}}
+              </div>
+
+              <div class="counter">
+                <button mat-mini-fab (click)="handleDecrease()">
+                  <mat-icon>remove</mat-icon>
+                </button>
+                <span>
+                  {{count}}
+                  </span>
+                <button mat-mini-fab color="primary" (click)="handleIncrease()">
+                  <mat-icon>add</mat-icon>
+                </button>
+              </div>
+            </mat-list-item>
+
+            <div *ngFor="let extra of product.extras">
+              <mat-list-item class="head"
+                             [ngClass]="{'reset':extra.min === 0 && extra.max === 1,'additional':extra.min >= 1}">
+                {{extra.name}}
+                <span class="additional" *ngIf="extra.min >= 1">{{'Required' | brackets : {start:'(', end:')'} }}</span>
+                <span class="reset" (click)="handleReset(extra)" *ngIf="extra.min === 0 && extra.max === 1">reset</span>
+              </mat-list-item>
+
+              <mat-list-item *ngIf="extra.min >= 1" class="please">
+                Please select {{extra.min}} item
+              </mat-list-item>
+
+              <mat-selection-list class="round" *ngIf="extra.min >= 1"
+                                  (selectionChange)="handleSelectionRequired($event)">
+                <div *ngFor="let item of extra.items; let i = index;">
+                  <mat-divider *ngIf="i > 0"></mat-divider>
+                  <mat-list-option [value]="item" [selected]="i === 0">
+                    {{item.name}}
+                    <span class="additional" *ngIf="item.price">
+                      {{item.price| currency:'USD' :'symbol':'0.0-0' | brackets : {start:'(', end:')'} }}
+                    </span>
+                  </mat-list-option>
+                </div>
+              </mat-selection-list>
+
+              <mat-selection-list class="round" *ngIf="extra.min===0 && extra.max <= 1"
+                                  (selectionChange)="handleSelectionSingle($event)"
+                #selectReset>
+                <div *ngFor="let item of extra.items; let i = index;">
+                  <mat-divider *ngIf="i>0"></mat-divider>
+                  <mat-list-option [value]="item">
+                    {{item.name}}
+                    <span class="additional" *ngIf="item.price">
+                      {{item.price| currency:'USD' :'symbol':'0.0-0' | brackets : {start:'(', end:')'} }}
+                    </span>
+                  </mat-list-option>
+                </div>
+              </mat-selection-list>
+
+              <mat-selection-list *ngIf="extra.max > 1" (selectionChange)="handleSelection($event)">
+                <div *ngFor="let item of extra.items; let i = index">
+                  <mat-divider *ngIf="i>0"></mat-divider>
+                  <mat-list-option [value]="item">
+                    {{item.name}}
+                    <span class="additional" *ngIf="item.price">
+                      {{item.price| currency:'USD' :'symbol':'0.0-0' | brackets : {start:'(', end:')'} }}
+                    </span>
+                  </mat-list-option>
+                </div>
+              </mat-selection-list>
+            </div>
+          </mat-list>
+
+        </div>
+        <div class="mat-dialog-actions">
+          <button mat-flat-button color="primary" (click)="addToCart()">
+              <span class="mat-button-wrapper">
+                <mat-icon>add_shopping_cart</mat-icon>
+                <span>
+                Add {{count}} to cart
+                </span>
+                <span>
+                   {{price| currency:'USD' :'symbol':'0.0-0'}}
+                </span>
+              </span>
+          </button>
+        </div>
+      </div>
+      <div tabindex="0" class="cdk-visually-hidden cdk-focus-trap-anchor"></div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,30 @@
+.menu {
+  justify-content: center;
+  display: flex;
+  flex-wrap: wrap;
+
+  .product-card {
+    flex-basis: 280px;
+    margin: 10px 5px;
+
+    mat-card-header {
+      mat-card-title {
+        max-height: 75px;
+        overflow: hidden;
+      }
+    }
+    img {
+      height: 240px;
+    }
+    mat-card-footer {
+      mat-chip-list {
+        display: flex;
+        justify-content: flex-end;
+        padding: 10px 20px;
+        mat-chip {
+          padding: 0 60px;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,98 @@
+/* You can add global styles to this file, and also import other style files */
+
+$modal-background-color: #fff;
+$modal-color: #000;
+$modal-primary-color: #aaa;
+$modal-secondary-color: #eee;
+$modal-secondary-color-dark: #ccc;
+$modal-overlay-background: rgba(66, 66, 66, 0.666);
+
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  overflow-x: hidden;
+}
+
+body.modal-open {
+  overflow-y: hidden;
+}
+
+app-product {
+
+  .mat-button-wrapper {
+    span {
+      text-transform: uppercase;
+    }
+  }
+
+  .mat-list-item {
+    &.please {
+      background: $modal-secondary-color-dark !important;
+      font-size: small;
+    }
+
+    .mat-button-wrapper {
+      padding: 0;
+    }
+
+    span.additional {
+      color: $modal-primary-color;
+    }
+    &.head {
+      &.additional {
+        .mat-list-item-content {
+          display: inherit;
+          line-height: 3;
+        }
+      }
+      &.reset {
+        .mat-list-item-content {
+          justify-content: space-between;
+          span.reset {
+            text-transform: lowercase;
+            cursor: pointer;
+          }
+        }
+      }
+    }
+
+    &.mat-list-option {
+      .mat-list-text {
+        display: inline-block !important;
+      }
+    }
+    &.price {
+      display: inline-flex;
+      justify-content: space-between;
+      flex-direction: row;
+      flex-wrap: wrap;
+
+      .mat-list-item-content {
+        flex-basis: 100%;
+        justify-content: space-between;
+      }
+      .counter {
+        width: 100px;
+        display: inline-flex;
+        justify-content: space-between;
+        span {
+          line-height: 1.5;
+        }
+      }
+    }
+  }
+
+  .mat-pseudo-checkbox {
+    color: $modal-color !important;
+
+  }
+  .round {
+    .mat-pseudo-checkbox {
+      border-radius: 50% !important;
+    }
+  }
+}

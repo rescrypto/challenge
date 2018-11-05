@@ -1,0 +1,26 @@
+<section class="menu">
+  <mat-card class="product-card" *ngFor="let product of products"
+            [routerLink]="['/menu', product.id]"
+  >
+    <mat-card-header>
+      <mat-card-title>{{product.name}}</mat-card-title>
+    </mat-card-header>
+    <img mat-card-image src={{product.images.thumbnail}} alt={{product.name}} title={{product.name}}>
+    <mat-card-content>
+      <p>
+        {{product.description}}
+      </p>
+    </mat-card-content>
+
+    <mat-card-footer>
+      <mat-chip-list>
+        <mat-chip [routerLink]="['/menu', product.id]" [color]="'primary'" [selected]="true">
+          {{ product.price | currency:'USD' :'symbol':'0.0-0'}}
+        </mat-chip>
+      </mat-chip-list>
+    </mat-card-footer>
+  </mat-card>
+</section>
+
+
+<router-outlet></router-outlet>
